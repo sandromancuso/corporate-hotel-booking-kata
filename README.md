@@ -47,7 +47,7 @@ Enables company admins to add and delete employees.
     
         void addEmployee(Long companyId, Long employeeId);
         
-        void deleteEmployee(Long companyId, Long employeeId);
+        void deleteEmployee(Long employeeId);
     
     }
 ```  
