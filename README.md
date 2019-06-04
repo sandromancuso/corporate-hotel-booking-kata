@@ -119,7 +119,6 @@ Allows employees to book rooms at hotels.
 * Hotel rooms can be booked many times as long as there are no conflicts with the dates.  
 * Return booking confirmation to the employee or error otherwise (exceptions can also be used).
 
-
 ### Kata Guidelines
 
 * Outside-In TDD should be used.
