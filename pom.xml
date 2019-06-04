@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.codurance</groupId>
+	<artifactId>hotel-booking-kata</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<!-- WEB DEVELOPMENT -->
+		<sparkjava.version>2.8.0</sparkjava.version>
+		<minimal-json.version>0.9.5</minimal-json.version>
+		<slf4j-simple.version>1.8.0-beta4</slf4j-simple.version>
+		<slf4j.version>${slf4j-simple.version}</slf4j.version>
+
+		<!-- TESTING -->
+		<junit.version>5.3.2</junit.version>
+
+		<mockito.version>2.23.4</mockito.version>
+		<hamcrest.version>2.0.0.0</hamcrest.version>
+		<assertj.version>3.6.2</assertj.version>
+
+		<restassured.version>3.0.5</restassured.version>
+
+		<commonslang.version>3.6</commonslang.version>
+
+		<!-- LEGACY TEST LIBRARIES -->
+		<!--<junit.version>4.12</junit.version>-->
+		<!--<mockito.version>1.10.19</mockito.version>-->
+		<!--<junitparams.version>1.0.6</junitparams.version>-->
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>${sparkjava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eclipsesource.minimal-json</groupId>
+			<artifactId>minimal-json</artifactId>
+			<version>${minimal-json.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j-simple.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>2.23.4</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>java-hamcrest</artifactId>
+			<version>${hamcrest.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${restassured.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>${restassured.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commonslang.version}</version>
+		</dependency>
+
+		<!--<dependency>-->
+		<!--<groupId>junit</groupId>-->
+		<!--<artifactId>junit</artifactId>-->
+		<!--<version>${junit.version}</version>-->
+		<!--<scope>test</scope>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+		<!--<groupId>org.mockito</groupId>-->
+		<!--<artifactId>mockito-all</artifactId>-->
+		<!--<version>${mockito.version}</version>-->
+		<!--<scope>test</scope>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+		<!--<groupId>pl.pragmatists</groupId>-->
+		<!--<artifactId>JUnitParams</artifactId>-->
+		<!--<version>${junitparams.version}</version>-->
+		<!--<scope>test</scope>-->
+		<!--</dependency>-->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>6.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*Should.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

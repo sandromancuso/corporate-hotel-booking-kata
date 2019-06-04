@@ -1,0 +1,56 @@
+sequenceDiagram
+    participant HotelManager
+    participant CompanyAdmin
+    participant Employee
+    participant HotelService
+    participant HotelRepository
+    participant CompanyService
+    participant CompanyRepository
+    participant PolicyService
+    participant PolicyRepository
+    participant BookingService
+    participant BookingRepository
+
+    HotelManager->>HotelService: setRoomType(hotel_id, roomType, quantity)
+    HotelService->>HotelRepository: setRoomType(hotel_id, roomType, quantity)
+    Note right of HotelRepository: change quantity does not impact existing bookings
+
+    CompanyAdmin->>CompanyService: addEmployee(company_id, user_id)
+    CompanyService->>CompanyRepository: addEmployee(company_id, user_id)
+
+    CompanyAdmin->>CompanyService: deleteEmployee(company_id, user_id)
+    CompanyService->>BookingService: deleteBookingsFor(user_id)
+    CompanyService->>PolicyService: deletePolicyFor(user_id)
+    CompanyService->>CompanyRepository: deleteEmployee(company_id, user_id)
+
+    CompanyAdmin->>PolicyService: setCompanyPolicy(company_id, [room types])
+    PolicyService->>PolicyRepository: storePolicy(company_id, [room types])
+    CompanyAdmin->>PolicyService: setEmployeePolicy(company_id, user_id, [room types])
+    PolicyService->>PolicyRepository: storePolicy(company_id, user_id, [room types])
+    Note right of PolicyService: Employee policy > company
+
+    Employee->>BookingService: book(user_id, hotel_id, room_type, date range)
+    BookingService->>HotelService: hotelBy(hotel_id)
+    HotelService->>HotelRepository: findBy(hotel_id)
+    HotelService-->>BookingService: Hotel
+    Note right of BookingService: Hotel(id, [room types/quantity])
+    BookingService->>BookingService: hotel exists & room type is valid
+    BookingService->>PolicyService: allowBooking(user_id, hotel_id, room_type)
+    PolicyService->>CompanyService: companyFor(user_id)
+    CompanyService->>CompanyRepository: companyFor(user_id)
+    PolicyService->>PolicyRepository: policyFor(company_id, user_id)
+    PolicyRepository-->>PolicyService: Policy(company_id, user_id, [room types])
+    Note right of PolicyService: company policy if user policy not found
+    PolicyService->>PolicyRepository: policyFor(company_id)
+    PolicyRepository-->>PolicyService: Policy(company_id, [room types])
+    PolicyService-->>BookingService: true/false
+    BookingService->>BookingRepository: bookingsFor(hotel_id, room_type, date_range)
+    BookingRepository-->>BookingService: List[Booking]
+    BookingService->>BookingService: hotel has rooms available
+    BookingService->>BookingService: createBooking()
+    Note right of BookingService: Booking (booking_id, user_id, hotel_id, room_type, date_range)
+    BookingService->>BookingRepository: store(Booking)
+    BookingService-->>Employee: Booking
+
+
+
