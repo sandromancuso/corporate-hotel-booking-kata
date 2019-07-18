@@ -7,7 +7,7 @@ Build a corporate hotel booking engine. This engine have to satisfy the needs of
 * **Company Admin:** Add/delete employees and also create booking policies for her company and employees.
 * **Employee:** Book a hotel room
 
-To achieve that, the engine will provide 4 main services that would in close collaboration with each other.
+To achieve that, the engine needs to provide 4 main services that work in close collaboration with each other.
 
 The four services are described below. The `<?>` indicates you can use whatever primitive or type you want. 
 
