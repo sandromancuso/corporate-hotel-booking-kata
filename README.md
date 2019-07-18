@@ -21,9 +21,9 @@ also can return hotel information given a hotel ID.
     
         // Collaborators(?)
     
-        void setRoomType(Long hotelId, <?> roomType, int quantity);
+        void setRoomType(<?> hotelId, <?> roomType, int quantity);
         
-        <?> findHotelBy(Long hotelId); 
+        <?> findHotelBy(<?> hotelId); 
     
     }
 ```
@@ -34,7 +34,7 @@ The `setRoomType(...)` method should create a hotel if there are no hotels with 
 room type according to the information received. A change in quantity of rooms should not not affect existing bookings.
 They will only affect new bookings, made after the change.  
 
-The `findHotelBy(Long hotelId)` should return all the information about number of rooms for the specified ID.   
+The `findHotelBy(<?> hotelId)` should return all the information about number of rooms for the specified ID.   
  
 ## Company Service 
 
@@ -45,9 +45,9 @@ Enables company admins to add and delete employees.
                 
         // Collaborators(?)
     
-        void addEmployee(Long companyId, Long employeeId);
+        void addEmployee(<?> companyId, <?> employeeId);
         
-        void deleteEmployee(Long employeeId);
+        void deleteEmployee(<?> employeeId);
     
     }
 ```  
@@ -73,11 +73,11 @@ allowed to book a standard room while another employee may be allowed to book st
     
         // Collaborators(?)
     
-        void setCompanyPolicy(Long companyId, <?> roomTypes);
+        void setCompanyPolicy(<?> companyId, <?> roomTypes);
         
-        void setEmployeePolicy(Long employeeId, <?> roomTypes);
+        void setEmployeePolicy(<?> employeeId, <?> roomTypes);
         
-        boolean isBookingAllowed(Long employeeId, <?> roomType);
+        boolean isBookingAllowed(<?> employeeId, <?> roomType);
     
     }
 ``` 
@@ -104,7 +104,7 @@ Allows employees to book rooms at hotels.
     
         // Collaborators (?)
         
-        <?> book(Long employeeId, Long hotelId, <?> roomType, Date checkIn, Date checkOut);
+        <?> book(<?> employeeId, <?> hotelId, <?> roomType, Date checkIn, Date checkOut);
     
     }
 ```
