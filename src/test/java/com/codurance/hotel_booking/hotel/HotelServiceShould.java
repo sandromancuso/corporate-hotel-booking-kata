@@ -3,8 +3,11 @@ package com.codurance.hotel_booking.hotel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 public class HotelServiceShould {
 
@@ -28,6 +31,16 @@ public class HotelServiceShould {
         hotelService.addHotel(HOTEL_ID, HOTEL_NAME);
 
         verify(hotelRepository).add(hotel);
+    }
+
+    @Test public void
+    throws_exception_when_adding_an_existing_hotel() {
+        given(hotelRepository.findById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
+
+        assertThrows(HotelExistException.class,
+                () -> hotelService.addHotel(HOTEL_ID, HOTEL_NAME));
+
+        verify(hotelRepository, never()).add(HOTEL);
     }
 
 }
