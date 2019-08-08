@@ -21,8 +21,10 @@ also can return hotel information given a hotel ID.
     
         // Collaborators(?)
     
-        void setRoomType(<?> hotelId, <?> roomType, int quantity);
-        
+        void addHotel(<?> hotelId, <?> hotelName);
+    
+        void setRoom(<?> hotelId, <?> roomNumber, <?> roomType);
+            
         <?> findHotelBy(<?> hotelId); 
     
     }
@@ -30,9 +32,10 @@ also can return hotel information given a hotel ID.
 
 **Rules**
 
-The `setRoomType(...)` method should create a hotel if there are no hotels with the received ID and update its 
-room type according to the information received. A change in quantity of rooms should not not affect existing bookings.
-They will only affect new bookings, made after the change.  
+The `addHotel(...)` method should throw exception when hotel ID already exists or create the hotel otherwise.
+
+The `setRoom(...)` method should throw exception if hotel does not exist. It should insert or update a room according 
+its room number.  
 
 The `findHotelBy(<?> hotelId)` should return all the information about number of rooms for the specified ID.   
  
