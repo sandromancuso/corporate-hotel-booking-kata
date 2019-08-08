@@ -39,7 +39,7 @@ public class SimpleBookingFeature {
     @Test public void
     employee_can_book_a_room() {
         hotelService.addHotel(HOTEL_ID, HOTEL_NAME);
-        hotelService.addRoom(HOTEL_ID, ROOM_NUMBER, MASTER_SUITE);
+        hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, MASTER_SUITE);
         companyService.addEmployee(COMPANY_ID, EMPLOYEE_ID);
 
         Optional<Booking> booking = bookingService.book(EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, CHECKIN, CHECKOUT);

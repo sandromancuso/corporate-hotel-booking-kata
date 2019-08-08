@@ -19,6 +19,7 @@ public class HotelService {
         hotelRepository.add(new Hotel(id, name));
     }
 
-    public void addRoom(int hotelId, int roomNumber, RoomType roomType) {
+    public void setRoom(int hotelId, int roomNumber, RoomType roomType) {
+        throw new HotelDoesNotExistException();
     }
 }
