@@ -7,7 +7,7 @@ class Hotel {
 
     public final int id;
 
-    public Hotel(int id) {
+    public Hotel(int id, String hotelName) {
         this.id = id;
     }
 

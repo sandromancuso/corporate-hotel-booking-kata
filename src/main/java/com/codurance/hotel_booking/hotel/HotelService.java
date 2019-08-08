@@ -12,7 +12,9 @@ public class HotelService {
         this.hotelRepository = hotelRepository;
     }
 
-    public void setRoomType(int hotelId, RoomType roomType, int quantity) {
-        hotelRepository.createHotel(new Hotel(hotelId));
+    public void addHotel(int id, String name) {
+    }
+
+    public void addRoom(int hotelId, int roomNumber, RoomType roomType) {
     }
 }
