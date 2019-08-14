@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import static com.codurance.hotel_booking.hotel.RoomType.*;
 import static java.util.Optional.empty;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -28,12 +29,12 @@ public class HotelServiceShould {
     public void initialise() {
         hotelRepository = mock(HotelRepository.class);
         hotelService = new HotelService(hotelRepository);
-        given(hotelRepository.findById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
+        given(hotelRepository.findHotelById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
     }
 
     @Test public void
     add_a_new_hotel() {
-        given(hotelRepository.findById(HOTEL_ID)).willReturn(Optional.empty());
+        given(hotelRepository.findHotelById(HOTEL_ID)).willReturn(Optional.empty());
         Hotel hotel = new Hotel(HOTEL_ID, HOTEL_NAME);
 
         hotelService.addHotel(HOTEL_ID, HOTEL_NAME);
@@ -43,7 +44,7 @@ public class HotelServiceShould {
 
     @Test public void
     throws_exception_when_adding_an_existing_hotel() {
-        given(hotelRepository.findById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
+        given(hotelRepository.findHotelById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
 
         assertThrows(HotelExistException.class,
                 () -> hotelService.addHotel(HOTEL_ID, HOTEL_NAME));
@@ -53,7 +54,7 @@ public class HotelServiceShould {
 
     @Test public void
     throws_exception_when_adding_a_room_to_a_non_existing_hotel() {
-        given(hotelRepository.findById(HOTEL_ID)).willReturn(empty());
+        given(hotelRepository.findHotelById(HOTEL_ID)).willReturn(empty());
 
         assertThrows(HotelDoesNotExistException.class,
                 () -> hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, MASTER_SUITE));
@@ -61,8 +62,6 @@ public class HotelServiceShould {
 
     @Test public void
     add_a_hotel_room() {
-        Room room = new Room(HOTEL_ID, ROOM_NUMBER, STANDARD);
-
         hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, STANDARD);
 
         verify(hotelRepository).add(STANDARD_ROOM);
@@ -79,6 +78,15 @@ public class HotelServiceShould {
         InOrder inOrder = inOrder(hotelRepository);
         inOrder.verify(hotelRepository).add(STANDARD_ROOM);
         inOrder.verify(hotelRepository).update(QUEEN_SUITE_ROOM);
+    }
+
+    @Test public void
+    find_hotels_by_ids() {          
+        given(hotelRepository.findHotelById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
+
+        Optional<Hotel> result = hotelService.findHotelById(HOTEL_ID);
+
+        assertThat(result).contains(HOTEL);
     }
     
 }

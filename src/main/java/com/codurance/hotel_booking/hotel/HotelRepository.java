@@ -8,7 +8,7 @@ class HotelRepository {
         throw new UnsupportedOperationException();
     }
 
-    Optional<Hotel> findById(int hotelId) {
+    Optional<Hotel> findHotelById(int hotelId) {
         throw new UnsupportedOperationException();
     }
 
