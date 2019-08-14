@@ -23,7 +23,7 @@ also can return hotel information given a hotel ID.
     
         void addHotel(<?> hotelId, <?> hotelName);
     
-        void setRoom(<?> hotelId, <?> roomNumber, <?> roomType);
+        void setRoom(<?> hotelId, <?> number, <?> roomType);
             
         <?> findHotelBy(<?> hotelId); 
     
