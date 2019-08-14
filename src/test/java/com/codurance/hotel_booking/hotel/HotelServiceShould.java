@@ -2,10 +2,11 @@ package com.codurance.hotel_booking.hotel;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 
 import java.util.Optional;
 
-import static com.codurance.hotel_booking.hotel.RoomType.MASTER_SUITE;
+import static com.codurance.hotel_booking.hotel.RoomType.*;
 import static java.util.Optional.empty;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
@@ -20,15 +21,19 @@ public class HotelServiceShould {
 
     private HotelRepository hotelRepository;
     private HotelService hotelService;
+    private static final Room STANDARD_ROOM = new Room(HOTEL_ID, ROOM_NUMBER, STANDARD);
+    private static final Room QUEEN_SUITE_ROOM = new Room(HOTEL_ID, ROOM_NUMBER, QUEEN_SUITE);
 
     @BeforeEach
     public void initialise() {
         hotelRepository = mock(HotelRepository.class);
         hotelService = new HotelService(hotelRepository);
+        given(hotelRepository.findById(HOTEL_ID)).willReturn(Optional.of(HOTEL));
     }
 
     @Test public void
     add_a_new_hotel() {
+        given(hotelRepository.findById(HOTEL_ID)).willReturn(Optional.empty());
         Hotel hotel = new Hotel(HOTEL_ID, HOTEL_NAME);
 
         hotelService.addHotel(HOTEL_ID, HOTEL_NAME);
@@ -52,6 +57,28 @@ public class HotelServiceShould {
 
         assertThrows(HotelDoesNotExistException.class,
                 () -> hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, MASTER_SUITE));
+    }
+
+    @Test public void
+    add_a_hotel_room() {
+        Room room = new Room(HOTEL_ID, ROOM_NUMBER, STANDARD);
+
+        hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, STANDARD);
+
+        verify(hotelRepository).add(STANDARD_ROOM);
+    }
+    
+    @Test public void
+    update_a_hotel_room() {
+        given(hotelRepository.findRoom(HOTEL_ID, ROOM_NUMBER))
+                .willReturn(empty(), Optional.of(STANDARD_ROOM));
+
+        hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, STANDARD);
+        hotelService.setRoom(HOTEL_ID, ROOM_NUMBER, QUEEN_SUITE);
+
+        InOrder inOrder = inOrder(hotelRepository);
+        inOrder.verify(hotelRepository).add(STANDARD_ROOM);
+        inOrder.verify(hotelRepository).update(QUEEN_SUITE_ROOM);
     }
     
 }

@@ -20,6 +20,14 @@ public class HotelService {
     }
 
     public void setRoom(int hotelId, int roomNumber, RoomType roomType) {
-        throw new HotelDoesNotExistException();
+        if (hotelRepository.findById(hotelId).isEmpty()) {
+            throw new HotelDoesNotExistException();
+        }
+        Room room = new Room(hotelId, roomNumber, roomType);
+        if (hotelRepository.findRoom(hotelId, roomNumber).isEmpty()) {
+            hotelRepository.add(room);
+        } else {
+            hotelRepository.update(room);
+        }
     }
 }

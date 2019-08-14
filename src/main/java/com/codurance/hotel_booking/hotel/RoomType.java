@@ -1,6 +1,9 @@
 package com.codurance.hotel_booking.hotel;
 
 public enum RoomType {
-    MASTER_SUITE
+    STANDARD,
+    JUNIOR_SUIT,
+    QUEEN_SUITE,
+    MASTER_SUITE;
 
 }
