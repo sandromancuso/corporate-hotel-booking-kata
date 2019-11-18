@@ -25,6 +25,7 @@ public class SimpleBookingFeature {
     private static final LocalDate CHECKOUT = LocalDate.of(2019, 8, 17);
     private static final String HOTEL_NAME = "Hilton";
     private static final int ROOM_NUMBER = 13;
+    private static final String BOOKING_ID = "234SFE";
     private HotelService hotelService;
     private CompanyService companyService;
     private BookingService bookingService;
@@ -44,7 +45,7 @@ public class SimpleBookingFeature {
 
         Optional<Booking> booking = bookingService.book(EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, CHECKIN, CHECKOUT);
 
-        assertThat(booking).isPresent();
+        assertThat(booking).contains(new Booking(BOOKING_ID, EMPLOYEE_ID, HOTEL_ID, ROOM_TYPE, CHECKIN, CHECKOUT));
     }
 
 }

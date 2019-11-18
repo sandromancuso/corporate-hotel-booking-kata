@@ -107,13 +107,14 @@ Allows employees to book rooms at hotels.
     
         // Collaborators (?)
         
-        <?> book(<?> employeeId, <?> hotelId, <?> roomType, Date checkIn, Date checkOut);
+        Booking book(<?> employeeId, <?> hotelId, <?> roomType, Date checkIn, Date checkOut);
     
     }
 ```
 
 **Rules**
 
+* Booking should contain a unique ID, employeeId, hotelId, roomType, checkIn and checkOut);
 * Check out date must be at least one day after the check in date.   
 * Validate if the hotel exists and room type is provided by the hotel
 * Verify if booking is allowed according to the booking policies defined, if any. See Booking Policy Service for more details.
@@ -138,7 +139,6 @@ unit testing the services, one public method at a time.
 * Services should not have any state. 
 * Persistent data should be stored in a (in-memory) repository.
 * Create a good package structure, respecting the different users and areas of the application.
-
 
 ## Kata variations
 
