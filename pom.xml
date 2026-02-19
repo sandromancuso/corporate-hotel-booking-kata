@@ -24,7 +24,7 @@
 
 		<restassured.version>3.0.5</restassured.version>
 
-		<commonslang.version>3.6</commonslang.version>
+		<commonslang.version>3.18.0</commonslang.version>
 
 		<!-- LEGACY TEST LIBRARIES -->
 		<!--<junit.version>4.12</junit.version>-->
